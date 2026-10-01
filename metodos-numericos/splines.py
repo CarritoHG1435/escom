@@ -1,8 +1,11 @@
 import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
+import pandas as pd
 
-puntos = [(1,5), (2,3), (3,4), (4,-2), (5,1), (6,-1)]
+puntos = np.array([(1,-2),(1.5, 1), (2.4,4), (3.2,2), (4,-1), (4.5,3), (6,5), (6.7,2)])
+px, py =  puntos[:, 0], puntos[:,1]
+
 arr_h = []
 for i in range(len(puntos) - 1):
     arr_h.append(puntos[i+1][0] - puntos[i][0])
@@ -39,3 +42,12 @@ for i in range(l):
 plt.scatter(puntos[-1][0], puntos[-1][1])
 
 plt.savefig('spline.png')
+data = {
+        "x" : px,
+        "a" : py,
+        "b" : [*arr_b, 'N/A'],
+        "c" : arr_c,
+        "d" : [*arr_d, 'N/A'],
+        }
+df = pd.DataFrame(data)
+print(df)
