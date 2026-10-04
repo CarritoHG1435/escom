@@ -11,15 +11,14 @@ def sec(p0,p1, f):
 def secante(f, a, b, j):
     p0 = [a]
     p1 = [b]
-    p2 = []
+    p2 = [sec(a,b,f)]
 
 
-    for i in range (j):
-        p2.append(sec(p0[i], p1[i], f))
-        p0.append(steff(p0[i], p1[i], p2[i]))
-        p1.append(sec(p2[i], p0[i+1], f))
+    for _ in range (j):
+        p0.append(p1[-1])
+        p1.append(p2[-1])
+        p2.append(sec(p0[-1], p1[-1], f))
 
-    p2.append(sec(p0[-1], p1[-1], f))
 
     df = pd.DataFrame({
         "p0": p0,
